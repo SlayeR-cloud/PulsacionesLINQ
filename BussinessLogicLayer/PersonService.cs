@@ -1,102 +1,47 @@
 ﻿using System;
+using System.Collections.Generic;
 using Entity;
-using DataAccessLayer;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace BusinessLogicLayer
+namespace BussinessLogicLayer
 {
-    /*                              Services will help in the next cases:
-     * 
-     * 1. When we going to do a process with the data:
-     * - Verify if the data is completed
-     * - Verify if the data satisfy the conditions we
-     * need to save them.
-     * 
-     * 2. When a method is shared (the method has attributes from a class
-     * and has other attributes from other class) in this case any of that classes
-     * are experts, so we're going to do that method here.
-     * 
-     * Services will only do calculations when the Entity class is not ready.
-     * As long as the Entity class is ready, it will do all the calculations 
-     * 
-     */
-
-    // This class also has a standard: EntityService
     public class PersonService
     {
-        public PersonRepository PersonRepository { get; set; }
-
-        public PersonService()
+        public static List<Person> GetPeople()
         {
-            PersonRepository = new PersonRepository();
+            return new List<Person> { new Person("Dave", "123", 28, 'M', 12),
+                new Person("Anthony", "124", 29, 'M', 21),
+                new Person("Dave", "125", 38, 'M', 12)};
         }
-
-        public string Save(Person person)
+        public static int GetAgeSum()
         {
-            string message;
-            try
-            {
-                PersonRepository.Save(person);
-                message = "Saved succesfull";
-            }
-            catch (Exception e)
-            {
-                message = "An error ocurred: " + e.Message;
-            }
-            return message;
+            var people = GetPeople();
+            return (from person in people select person.Age).Sum();
         }
-        public string Delete(string id)
+        public static double GetAgeAverage()
         {
-            string message;
-
-            try
-            {
-                PersonRepository.Delete(id);
-                message = "Deleted succesfull";
-            }
-            catch (Exception e)
-            {
-                message = "An error ocurred: " + e.Message;
-            }
-            return message;
+            var people = GetPeople();
+            return Math.Round((from person in people select person.Age).Average(), 0);
         }
-        public string Modify(string id, Person person)
+        public static string GetMostSex()
         {
-            string message;
+            var people = GetPeople();
+            var counter = people.Where(person => person.Sex == 'F').Count();
+            var counter2 = people.Where(person => person.Sex == 'M').Count();
 
-            try
+            if (counter > counter2)
             {
-                PersonRepository.Modify(id, person);
-                message = "Modified succesfull";
+                return "F";
             }
-            catch (Exception e)
+            else if (counter2 > counter)
             {
-                message = "An error ocurred: " + e.Message;
+                return "M";
             }
-            return message;
-        }
-        public Person Search(string id)
-        {
-            Person person;
-
-            try
+            else
             {
-                person = PersonRepository.Search(id);
-            }
-            catch (Exception)
-            {
-                person = null;
-            }
-            return person;
-        }
-        public PersonConsultResponse ConsultResponse()
-        {
-            try
-            {
-                return new PersonConsultResponse(PersonRepository.GetQuery());
-            }
-            catch (Exception e)
-            {
-                return new PersonConsultResponse("An error ocurred: " + e.Message);
+                return "F & M";
             }
         }
     }

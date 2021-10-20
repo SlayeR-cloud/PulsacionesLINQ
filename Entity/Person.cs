@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Entity // in this namespace will be the core classes of the problem
+namespace Entity
 {
-    // This class handles all the methods it can, it is an expert in its own field.
     public class Person
     {
+        // This class handles all the methods it can, it is an expert in its own field.
         public string Name { get; set; }
         public string Id { get; set; }
         public int Age { get; set; }

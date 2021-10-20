@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Entity;
+using BussinessLogicLayer;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -23,6 +25,30 @@ namespace PresentationGUI
         public MainWindow()
         {
             InitializeComponent();
+            ShowDataInDataGrid();
+            GetAgeSum();
+            GetAgeAverage();
+            GetMostSex();
+        }
+
+        private void ShowDataInDataGrid()
+        {
+            dataGridPulsations.ItemsSource = PersonService.GetPeople();
+        }
+        private void GetAgeSum()
+        {
+            var sum = PersonService.GetAgeSum();
+            sumLabel.Content += "" + sum;
+        }
+        private void GetAgeAverage()
+        {
+            var age = PersonService.GetAgeAverage();
+            averageLabel.Content += "" + age;
+        }
+        private void GetMostSex()
+        {
+            var response = PersonService.GetMostSex();
+            sexLabel.Content += response;
         }
     }
 }

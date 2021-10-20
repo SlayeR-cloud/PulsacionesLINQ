@@ -7,11 +7,55 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="30,26,0,0" VerticalAlignment="Top"/>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="30,67,0,0" VerticalAlignment="Top"/>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="30,111,0,0" VerticalAlignment="Top"/>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="30,161,0,0" VerticalAlignment="Top"/>
-        <DataGrid HorizontalAlignment="Left" Height="320" Margin="163,37,0,0" VerticalAlignment="Top" Width="570" RenderTransformOrigin="-0.2,-0.47"/>
-
+        <Label x:Name="sumLabel"
+               Content="Suma Edades: "
+               HorizontalAlignment="Left"
+               Margin="4,26,0,0" 
+               VerticalAlignment="Top"/>
+        <Label x:Name="averageLabel"
+            Content="Promedio Edades: "
+            HorizontalAlignment="Left"
+            Margin="4,52,0,0" 
+            VerticalAlignment="Top"/>
+        <Label x:Name="sexLabel"
+            Content="Mayor ocurrencia de Sexo: "
+            HorizontalAlignment="Left"
+            Margin="4,78,0,0" 
+            VerticalAlignment="Top"/>
+        <DataGrid HorizontalAlignment="Left"
+                  AutoGenerateColumns="False"
+                  x:Name="dataGridPulsations"
+                  Height="399" Width="602"
+                  Margin="180,10,0,0"
+                  VerticalAlignment="Top"
+                  RenderTransformOrigin="-0.2,-0.47">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="DataID"
+                                    Header="Id"
+                                    Binding="{Binding Path=Id}"
+                                    Width="*"
+                                    IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="DataName"
+                                    Header="Name"
+                                    Binding="{Binding Path=Name}"
+                                    Width="*"
+                                    IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="DataAge"
+                                    Header="Age"
+                                    Binding="{Binding Path=Age}"
+                                    Width="*"
+                                    IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="DataSex"
+                                    Header="Sex"
+                                    Binding="{Binding Path=Sex}"
+                                    Width="*"
+                                    IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="DataPulsation"
+                                    Header="Pulse"
+                                    Binding="{Binding Path=Pulsation}"
+                                    Width="*"
+                                    IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>
